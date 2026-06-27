@@ -84,6 +84,48 @@
       opacity: 1;
       transform: translate(0, 0) scale(1) !important;
     }
+    :root {
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+}
+
+.spotlight {
+  background: radial-gradient(circle 450px at var(--mouse-x) var(--mouse-y), rgba(59, 130, 246, 0.15), transparent 100%);
+}
+.secondary-glow {
+  background: radial-gradient(circle 600px at 50% 30%, rgba(234, 179, 8, 0.1), transparent 100%);
+}
+.grid-overlay {
+  background-image: 
+    linear-gradient(to right, #000000 1px, transparent 1px),
+    linear-gradient(to bottom, #000000 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+/* Dark Mode Overrides */
+.dark .spotlight {
+  background: radial-gradient(circle 450px at var(--mouse-x) var(--mouse-y), rgba(0, 243, 255, 0.12), transparent 100%);
+}
+.dark .secondary-glow {
+  background: radial-gradient(circle 600px at 50% 30%, rgba(29, 78, 216, 0.2), transparent 100%);
+}
+.dark .grid-overlay {
+  background-image: 
+    linear-gradient(to right, #ffffff 1px, transparent 1px),
+    linear-gradient(to bottom, #ffffff 1px, transparent 1px);
+}
+
+/* Accent Spin Keyframes */
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes spinReverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+.animate-spin-slow { animation: spinSlow 120s linear infinite; }
+.animate-spin-reverse { animation: spinReverse 80s linear infinite; }
   </style>
 
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -109,6 +151,20 @@
     }
   }" 
   class="relative w-full min-h-screen bg-[#fafafa] dark:bg-[#03050a] text-slate-900 dark:text-slate-100 transition-colors duration-500 overflow-x-hidden font-sans"
+<div id="chip-background" aria-hidden="true" class="fixed inset-0 w-screen h-screen -z-10 overflow-hidden pointer-events-none select-none transition-colors duration-700 bg-[#fafafa] dark:bg-[#03050a]">
+  
+  <div class="spotlight absolute inset-0 opacity-40 dark:opacity-30 transition-all duration-300 mix-blend-screen"></div>
+
+  <div class="secondary-glow absolute inset-0 opacity-25 dark:opacity-10 transition-all duration-500 mix-blend-plus-lighter"></div>
+
+  <div class="grid-overlay absolute inset-0 w-full h-full opacity-[0.03] dark:opacity-[0.04]"></div>
+
+  <div class="absolute top-0 left-1/4 right-1/4 h-px bg-gradient-to-r from-transparent via-cyan-500/30 dark:via-cyan-400/20 to-transparent"></div>
+  <div class="absolute bottom-1/3 left-10 right-10 h-px opacity-40 bg-gradient-to-r from-transparent via-slate-400/20 to-transparent"></div>
+
+  <div class="absolute top-1/4 right-10 w-96 h-96 rounded-full border border-slate-500/5 dark:border-slate-400/3 animate-spin-slow"></div>
+  <div class="absolute top-1/4 right-10 w-96 h-96 rounded-full border border-dashed border-slate-500/5 dark:border-slate-400/2 animate-spin-reverse"></div>
+</div>
 >
 
   <div class="absolute inset-0 pointer-events-none overflow-hidden z-0 opacity-30 dark:opacity-20" aria-hidden="true">
@@ -789,6 +845,21 @@
         }
       }
     }
+    document.addEventListener("DOMContentLoaded", () => {
+    const container = document.getElementById("chip-background");
+    
+    if (container) {
+      window.addEventListener("mousemove", (e) => {
+        const rect = container.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        
+        // Pass the mouse positions straight into the CSS environment
+        document.documentElement.style.setProperty('--mouse-x', `${x}%`);
+        document.documentElement.style.setProperty('--mouse-y', `${y}%`);
+      }, { passive: true });
+    }
+  });
   </script>
 </body>
 </html>
