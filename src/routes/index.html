@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Aspiring Information Engineer — TUM Applicant Portfolio</title>
+  <meta name="description" content="Grade 12 student from Indonesia applying to Information Engineering at the Technical University of Munich. Projects, skills, and academic background.">
+  <meta property="og:title" content="Aspiring Information Engineer — TUM Applicant Portfolio">
+  <meta property="og:description" content="Grade 12 student applying to Information Engineering at TUM. Projects in Python, web development, and systems thinking.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            serif: ['"Playfair Display"', 'serif'],
+            mono: ['"Fira Code"', 'monospace'],
+          },
+          colors: {
+            accent: '#3b82f6', // Premium Engineering Blue Theme
+            surface: 'rgba(30, 41, 59, 0.03)',
+            rule: 'rgba(226, 232, 240, 0.8)',
+            border: '#cbd5e1',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style type="text/css">
+    /* Synchronized Theme Tokens Mapping */
+    .dark {
+      --color-surface: rgba(255, 255, 255, 0.02);
+      --color-rule: rgba(255, 255, 255, 0.08);
+      --color-border: rgba(255, 255, 255, 0.15);
+    }
+    .bg-surface { background-color: var(--color-surface, rgba(30, 41, 59, 0.03)); }
+    .border-rule, .bg-rule { border-color: var(--color-rule, rgba(226, 232, 240, 0.8)); background-color: var(--color-rule); }
+    .border-border { border-color: var(--color-border, #cbd5e1); }
+
+    /* Custom Engineering Structural Layout Utilities */
+    .section-pad { padding-top: 5rem; padding-bottom: 5rem; }
+    .eyebrow { font-family: "Fira Code", monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: #64748b; }
+    
+    /* Technical Grid Matrix Background Canvas */
+    .grid-bg {
+      background-image: linear-gradient(to right, rgba(99, 102, 241, 0.05) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(99, 102, 241, 0.05) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .dark .grid-bg {
+      background-image: linear-gradient(to right, rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+    }
+
+    /* Cyber Glitch Visual Dynamics */
+    @keyframes matrixGlitch {
+      0% { clip-path: inset(40% 0 61% 0); transform: skew(0.3deg); }
+      20% { clip-path: inset(92% 0 1% 0); transform: skew(-0.5deg); }
+      40% { clip-path: inset(15% 0 80% 0); transform: skew(0.5deg); }
+      60% { clip-path: inset(80% 0 5% 0); transform: skew(-0.2deg); }
+      80% { clip-path: inset(3% 0 92% 0); transform: skew(0.4deg); }
+      100% { clip-path: inset(40% 0 61% 0); transform: skew(0); }
+    }
+    .animate-matrix-glitch {
+      position: relative;
+      animation: matrixGlitch 0.4s linear infinite;
+    }
+
+    /* Pure Deceleration Scroll In View Presets */
+    .scroll-reveal {
+      opacity: 0;
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .scroll-reveal.revealed {
+      opacity: 1;
+      transform: translate(0, 0) scale(1) !important;
+    }
+  </style>
+
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body 
+  x-data="{ 
+    isDark: true,
+    scrolled: false,
+    mobileMenuOpen: false,
+    init() {
+      if (localStorage.getItem('theme') === 'light') {
+        this.isDark = false;
+        document.documentElement.classList.remove('dark');
+      }
+      window.addEventListener('scroll', () => {
+        this.scrolled = window.scrollY > 8;
+      }, { passive: true });
+    },
+    toggleTheme() {
+      this.isDark = !this.isDark;
+      document.documentElement.classList.toggle('dark', this.isDark);
+      localStorage.setItem('theme', this.isDark ? 'dark' : 'light');
+    }
+  }" 
+  class="relative w-full min-h-screen bg-[#fafafa] dark:bg-[#03050a] text-slate-900 dark:text-slate-100 transition-colors duration-500 overflow-x-hidden font-sans"
+>
+
+  <div class="absolute inset-0 pointer-events-none overflow-hidden z-0 opacity-30 dark:opacity-20" aria-hidden="true">
+    <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-blue-500/10 blur-[120px]"></div>
+    <div class="absolute bottom-[20%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-indigo-500/10 blur-[100px]"></div>
+  </div>
+
+  <header 
+    :class="scrolled ? 'border-slate-200/50 dark:border-white/10 bg-white/80 dark:bg-[#03050a]/80' : 'border-transparent bg-transparent'"
+    class="sticky top-0 z-40 w-full border-b transition-colors duration-300 backdrop-blur-md"
+  >
+    <div class="mx-auto flex max-w-7xl w-full items-center justify-between px-4 sm:px-6 md:px-8 py-4">
+      <a href="#top" class="flex items-center gap-2 font-mono text-sm font-medium tracking-tight">
+        <span class="relative inline-flex h-2.5 w-2.5">
+          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75"></span>
+          <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-accent"></span>
+        </span>
+        <span>portfolio<span class="text-slate-400 dark:text-slate-500">.ie</span></span>
+      </a>
+      
+      <nav class="hidden items-center gap-7 md:flex">
+        <a href="#about" class="text-sm text-slate-600 dark:text-slate-400 transition-colors hover:text-accent font-medium">About</a>
+        <a href="#academics" class="text-sm text-slate-600 dark:text-slate-400 transition-colors hover:text-accent font-medium">Academics</a>
+        <a href="#skills" class="text-sm text-slate-600 dark:text-slate-400 transition-colors hover:text-accent font-medium">Skills</a>
+        <a href="#projects" class="text-sm text-slate-600 dark:text-slate-400 transition-colors hover:text-accent font-medium">Projects</a>
+        <a href="#experience" class="text-sm text-slate-600 dark:text-slate-400 transition-colors hover:text-accent font-medium">Experience</a>
+        <a href="#goals" class="text-sm text-slate-600 dark:text-slate-400 transition-colors hover:text-accent font-medium">Goals</a>
+        <a href="#contact" class="text-sm text-slate-600 dark:text-slate-400 transition-colors hover:text-accent font-medium">Contact</a>
+      </nav>
+
+      <div class="flex items-center gap-2">
+        <button 
+          @click="toggleTheme()" 
+          aria-label="Toggle theme"
+          class="rounded-sm border border-border bg-transparent p-2 text-slate-600 dark:text-slate-400 transition hover:text-accent hover:border-accent/40"
+        >
+          <svg x-show="isDark" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" /></svg>
+          <svg x-show="!isDark" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" /></svg>
+        </button>
+        <button 
+          @click="mobileMenuOpen = !mobileMenuOpen" 
+          aria-label="Toggle menu"
+          class="rounded-sm border border-border p-2 md:hidden text-slate-600 dark:text-slate-400"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
+        </button>
+      </div>
+    </div>
+
+    <div x-show="mobileMenuOpen" x-transition class="border-t border-rule bg-white dark:bg-[#03050a] md:hidden">
+      <nav class="mx-auto flex max-w-7xl flex-col px-4 py-3 gap-2">
+        <a href="#about" @click="mobileMenuOpen = false" class="py-2 text-sm text-slate-600 dark:text-slate-400 hover:text-accent font-medium">About</a>
+        <a href="#academics" @click="mobileMenuOpen = false" class="py-2 text-sm text-slate-600 dark:text-slate-400 hover:text-accent font-medium">Academics</a>
+        <a href="#skills" @click="mobileMenuOpen = false" class="py-2 text-sm text-slate-600 dark:text-slate-400 hover:text-accent font-medium">Skills</a>
+        <a href="#projects" @click="mobileMenuOpen = false" class="py-2 text-sm text-slate-600 dark:text-slate-400 hover:text-accent font-medium">Projects</a>
+        <a href="#experience" @click="mobileMenuOpen = false" class="py-2 text-sm text-slate-600 dark:text-slate-400 hover:text-accent font-medium">Experience</a>
+        <a href="#goals" @click="mobileMenuOpen = false" class="py-2 text-sm text-slate-600 dark:text-slate-400 hover:text-accent font-medium">Goals</a>
+        <a href="#contact" @click="mobileMenuOpen = false" class="py-2 text-sm text-slate-600 dark:text-slate-400 hover:text-accent font-medium">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="relative z-10 w-full max-w-7xl mx-auto min-h-screen flex flex-col px-4 sm:px-6 md:px-8">
+    <main class="grow">
+      
+      <section id="top" class="relative w-full overflow-hidden border-b border-rule">
+        <div class="absolute inset-0 w-full h-full grid-bg opacity-40" aria-hidden="true"></div>
+        <div class="relative w-full py-16 md:py-24 lg:py-28">
+          
+          <div class="scroll-reveal" style="transform: translateY(15px);" data-delay="100">
+            <p class="eyebrow text-accent font-mono">[SYS_INIT] · TUM Applicant · Information Engineering</p>
+          </div>
+          
+          <div class="scroll-reveal" style="transform: translateY(25px);" data-delay="250">
+            <h1 class="mt-5 max-w-4xl font-serif text-4xl font-semibold leading-[1.1] tracking-tight text-slate-900 dark:text-white sm:text-5xl md:text-7xl">
+              Aspiring Information<br />
+              <span class="text-accent">Engineer.</span>
+            </h1>
+          </div>
+
+          <div class="scroll-reveal" style="transform: translateY(25px);" data-delay="350">
+            <p class="mt-6 max-w-2xl text-base text-slate-600 dark:text-slate-400 md:text-lg font-light leading-relaxed">
+              A Grade 12 student from Indonesia building software, learning systems, and preparing to study Information Engineering at the Technical University of Munich. Focused on the intersection of code, data, and real-world problem solving.
+            </p>
+          </div>
+
+          <div class="scroll-reveal" style="transform: translateY(20px);" data-delay="450">
+            <div class="mt-9 flex flex-wrap items-center gap-3">
+              <a href="#projects" class="inline-flex items-center gap-2 rounded-sm bg-slate-900 dark:bg-slate-100 px-5 py-2.5 text-sm font-medium text-white dark:text-[#03050a] transition hover:opacity-90 font-mono">
+                EXEC_PROJECTS 
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
+              </a>
+              <a href="#contact" class="inline-flex items-center gap-2 rounded-sm border border-border bg-transparent px-5 py-2.5 text-sm font-medium transition hover:bg-slate-100 dark:hover:bg-white/5 font-mono">
+                CONNECT
+              </a>
+            </div>
+          </div>
+
+          <div class="scroll-reveal" style="transform: translateY(20px);" data-delay="550">
+            <dl class="mt-16 grid max-w-2xl grid-cols-2 gap-x-8 gap-y-6 border-t border-rule pt-8 sm:grid-cols-4">
+              <div>
+                <dt class="eyebrow">Location</dt>
+                <dd class="mt-1 font-mono text-sm text-slate-900 dark:text-white/80">Bandung, ID</dd>
+              </div>
+              <div>
+                <dt class="eyebrow">Target</dt>
+                <dd class="mt-1 font-mono text-sm text-slate-900 dark:text-white/80">TUM Munich</dd>
+              </div>
+              <div>
+                <dt class="eyebrow">Field</dt>
+                <dd class="mt-1 font-mono text-sm text-slate-900 dark:text-white/80">Info. Eng.</dd>
+              </div>
+              <div>
+                <dt class="eyebrow">Languages</dt>
+                <dd class="mt-1 font-mono text-sm text-slate-900 dark:text-white/80">EN · DE A1</dd>
+              </div>
+            </dl>
+          </div>
+
+        </div>
+      </section>
+
+      <section id="about" class="section-pad border-b border-rule" x-data="{ headingText: 'About me' }">
+        <div class="w-full">
+          
+          <div class="mb-12 flex w-full items-end justify-between border-b border-rule pb-4 scroll-reveal" style="transform: translateY(15px);">
+            <div>
+              <p class="eyebrow font-mono">// ABOUT</p>
+              <h2 class="mt-2 font-serif text-3xl text-slate-900 dark:text-white md:text-4xl min-h-10" 
+                  x-data="glitchComponent(headingText)" x-init="triggerGlitch()">
+                <span class="font-mono tracking-wide" x-text="displayText"></span>
+              </h2>
+            </div>
+            <span class="font-mono text-xs text-slate-400 dark:text-slate-500">§ CODE_01</span>
+          </div>
+
+          <div class="grid gap-10 md:grid-cols-12">
+            <div class="md:col-span-7 space-y-5 text-base leading-relaxed text-slate-700 dark:text-slate-300 font-light">
+              <div class="scroll-reveal" style="transform: translateY(20px);" data-delay="100">
+                <p>
+                  I'm a Grade 12 student from Indonesia preparing to study <strong class="font-semibold text-slate-900 dark:text-white">Information Engineering</strong> at the Technical University of Munich. My interest sits at the boundary between software and the physical systems it controls — how data moves, how processes connect, and how small pieces of code translate into real-world outcomes.
+                </p>
+              </div>
+              <div class="scroll-reveal" style="transform: translateY(20px);" data-delay="150">
+                <p>
+                  Most of what I know I taught myself, starting with Python in school and expanding into web development through projects. I'm drawn to <strong class="font-semibold text-slate-900 dark:text-white">software systems, data structures, and applied problem solving</strong> — the kind of work that requires both rigor and creativity.
+                </p>
+              </div>
+              <div class="scroll-reveal" style="transform: translateY(20px);" data-delay="200">
+                <p>
+                  Outside coursework, I co-founded a small custom clothing business with friends. I built the website, the order intake flow, and the email automation around it. The technical part was modest; the lesson was not — I learned what it means to ship something real that other people depend on.
+                </p>
+              </div>
+            </div>
+            
+            <aside class="md:col-span-5">
+              <div class="scroll-reveal" style="transform: translateY(20px);" data-delay="150">
+                <div class="rounded-sm border border-rule bg-surface p-6 backdrop-blur-sm">
+                  <p class="eyebrow font-mono text-accent">METADATA_INDEX</p>
+                  <ul class="mt-4 space-y-3 text-sm">
+                    <li class="flex items-baseline justify-between gap-4 border-b border-rule/60 pb-2">
+                      <span class="eyebrow">Status</span>
+                      <span class="text-right font-mono text-xs text-slate-900 dark:text-slate-200">Grade 12 student, applying 2026</span>
+                    </li>
+                    <li class="flex items-baseline justify-between gap-4 border-b border-rule/60 pb-2">
+                      <span class="eyebrow">Focus</span>
+                      <span class="text-right font-mono text-xs text-slate-900 dark:text-slate-200">Software systems & data</span>
+                    </li>
+                    <li class="flex items-baseline justify-between gap-4 border-b border-rule/60 pb-2">
+                      <span class="eyebrow">Building</span>
+                      <span class="text-right font-mono text-xs text-slate-900 dark:text-slate-200">Custom clothing platform</span>
+                    </li>
+                    <li class="flex items-baseline justify-between gap-4 border-b border-rule/60 pb-2">
+                      <span class="eyebrow">Learning</span>
+                      <span class="text-right font-mono text-xs text-slate-900 dark:text-slate-200">German (A1), algorithms</span>
+                    </li>
+                    <li class="flex items-baseline justify-between gap-4 pb-0">
+                      <span class="eyebrow">Reading</span>
+                      <span class="text-right font-mono text-xs text-slate-900 dark:text-slate-200">Designing Data-Intensive Apps</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </aside>
+          </div>
+
+        </div>
+      </section>
+
+      <section id="academics" class="section-pad border-b border-rule" x-data="{ headingText: 'Academic background' }">
+        <div class="w-full">
+          <div class="mb-12 flex w-full items-end justify-between border-b border-rule pb-4 scroll-reveal" style="transform: translateY(15px);">
+            <div>
+              <p class="eyebrow font-mono">// EDUCATION</p>
+              <h2 class="mt-2 font-serif text-3xl text-slate-900 dark:text-white md:text-4xl min-h-10" 
+                  x-data="glitchComponent(headingText)" x-init="triggerGlitch()">
+                <span class="font-mono tracking-wide" x-text="displayText"></span>
+              </h2>
+            </div>
+            <span class="font-mono text-xs text-slate-400 dark:text-slate-500">§ CODE_02</span>
+          </div>
+
+          <div class="grid gap-10 md:grid-cols-12">
+            <div class="md:col-span-7">
+              <div class="scroll-reveal" style="transform: translateY(20px);" data-delay="100">
+                <div class="rounded-sm border border-rule bg-background/50 backdrop-blur-sm">
+                  <div class="flex flex-wrap items-baseline justify-between border-b border-rule p-5 gap-2">
+                    <div>
+                      <p class="font-mono text-xs text-slate-500 dark:text-slate-400">Senior High School</p>
+                      <h3 class="mt-1 font-serif text-xl text-slate-900 dark:text-white">Grade 12 · International Stream</h3>
+                      <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Jakarta, Indonesia</p>
+                    </div>
+                    <span class="font-mono text-xs text-slate-500 dark:text-slate-400">2023 — 2026</span>
+                  </div>
+                  <div class="p-5">
+                    <p class="eyebrow mb-3">Core subjects</p>
+                    <div class="grid grid-cols-2 gap-2 sm:grid-cols-4">
+                      <div class="rounded-sm border border-rule bg-surface px-3 py-2 text-center font-mono text-xs text-slate-800 dark:text-slate-200 hover:border-accent/40 transition-colors duration-300">Mathematics</div>
+                      <div class="rounded-sm border border-rule bg-surface px-3 py-2 text-center font-mono text-xs text-slate-800 dark:text-slate-200 hover:border-accent/40 transition-colors duration-300">Physics</div>
+                      <div class="rounded-sm border border-rule bg-surface px-3 py-2 text-center font-mono text-xs text-slate-800 dark:text-slate-200 hover:border-accent/40 transition-colors duration-300">Programming</div>
+                      <div class="rounded-sm border border-rule bg-surface px-3 py-2 text-center font-mono text-xs text-slate-800 dark:text-slate-200 hover:border-accent/40 transition-colors duration-300">English</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="md:col-span-5">
+              <div class="scroll-reveal" style="transform: translateY(20px);" data-delay="150">
+                <p class="eyebrow mb-4">Languages</p>
+                <ul class="space-y-5">
+                  <li>
+                    <div class="flex items-baseline justify-between">
+                      <span class="text-sm font-medium text-slate-800 dark:text-slate-200">Indonesian</span>
+                      <span class="font-mono text-xs text-slate-500 dark:text-slate-400">Native</span>
+                    </div>
+                    <div class="mt-2 h-1 w-full overflow-hidden rounded-full bg-surface">
+                      <div class="h-full bg-slate-900 dark:bg-accent" style="width: 100%"></div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="flex items-baseline justify-between">
+                      <span class="text-sm font-medium text-slate-800 dark:text-slate-200">English</span>
+                      <span class="font-mono text-xs text-slate-500 dark:text-slate-400">Intermediate</span>
+                    </div>
+                    <div class="mt-2 h-1 w-full overflow-hidden rounded-full bg-surface">
+                      <div class="h-full bg-slate-900 dark:bg-accent" style="width: 88%"></div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="flex items-baseline justify-between">
+                      <span class="text-sm font-medium text-slate-800 dark:text-slate-200">German</span>
+                      <span class="font-mono text-xs text-slate-500 dark:text-slate-400">A1 — In progress</span>
+                    </div>
+                    <div class="mt-2 h-1 w-full overflow-hidden rounded-full bg-surface">
+                      <div class="h-full bg-slate-900 dark:bg-accent" style="width: 22%"></div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills" class="section-pad border-b border-rule" x-data="{ headingText: 'Skills & Frameworks' }">
+        <div class="w-full">
+          <div class="mb-12 flex w-full items-end justify-between border-b border-rule pb-4 scroll-reveal" style="transform: translateY(15px);">
+            <div>
+              <p class="eyebrow font-mono">// TOOLKIT</p>
+              <h2 class="mt-2 font-serif text-3xl text-slate-900 dark:text-white md:text-4xl min-h-10" 
+                  x-data="glitchComponent(headingText)" x-init="triggerGlitch()">
+                <span class="font-mono tracking-wide" x-text="displayText"></span>
+              </h2>
+            </div>
+            <span class="font-mono text-xs text-slate-400 dark:text-slate-500">§ CODE_03</span>
+          </div>
+
+          <div class="grid gap-px overflow-hidden rounded-sm border border-rule bg-rule sm:grid-cols-3">
+            <div class="scroll-reveal" style="transform: translateY(20px);" data-delay="0">
+              <div class="bg-white dark:bg-[#03050a] p-6 h-full transition-colors duration-300 hover:bg-surface/50">
+                <p class="eyebrow font-mono text-accent">PROGRAMMING</p>
+                <ul class="mt-4 space-y-2">
+                  <li class="flex items-center gap-2 text-sm text-slate-800 dark:text-slate-200 font-light"><span class="font-mono text-xs text-slate-400">›</span>Python</li>
+                  <li class="flex items-center gap-2 text-sm text-slate-800 dark:text-slate-200 font-light"><span class="font-mono text-xs text-slate-400">›</span>HTML</li>
+                  <li class="flex items-center gap-2 text-sm text-slate-800 dark:text-slate-200 font-light"><span class="font-mono text-xs text-slate-400">›</span>CSS</li>
+                  <li class="flex items-center gap-2 text-sm text-slate-800 dark:text-slate-200 font-light"><span class="font-mono text-xs text-slate-400">›</span>JavaScript</li>
+                </ul>
+              </div>
+            </div>
+            <div class="scroll-reveal" style="transform: translateY(20px);" data-delay="80">
+              <div class="bg-white dark:bg-[#03050a] p-6 h-full transition-colors duration-300 hover:bg-surface/50">
+                <p class="eyebrow font-mono text-accent">TOOLS</p>
+                <ul class="mt-4 space-y-2">
+                  <li class="flex items-center gap-2 text-sm text-slate-800 dark:text-slate-200 font-light"><span class="font-mono text-xs text-slate-400">›</span>Git &amp; GitHub</li>
+                  <li class="flex items-center gap-2 text-sm text-slate-800 dark:text-slate-200 font-light"><span class="font-mono text-xs text-slate-400">›</span>VS Code</li>
+                  <li class="flex items-center gap-2 text-sm text-slate-800 dark:text-slate-200 font-light"><span class="font-mono text-xs text-slate-400">›</span>Netbeans</li>
+                  <li class="flex items-center gap-2 text-sm text-slate-800 dark:text-slate-200 font-light"><span class="font-mono text-xs text-slate-400">›</span>MySQL</li>
+                </ul>
+              </div>
+            </div>
+            <div class="scroll-reveal" style="transform: translateY(20px);" data-delay="160">
+              <div class="bg-white dark:bg-[#03050a] p-6 h-full transition-colors duration-300 hover:bg-surface/50">
+                <p class="eyebrow font-mono text-accent">CONCEPTS</p>
+                <ul class="mt-4 space-y-2">
+                  <li class="flex items-center gap-2 text-sm text-slate-800 dark:text-slate-200 font-light"><span class="font-mono text-xs text-slate-400">›</span>Algorithms</li>
+                  <li class="flex items-center gap-2 text-sm text-slate-800 dark:text-slate-200 font-light"><span class="font-mono text-xs text-slate-400">›</span>OOP</li>
+                  <li class="flex items-center gap-2 text-sm text-slate-800 dark:text-slate-200 font-light"><span class="font-mono text-xs text-slate-400">›</span>System thinking</li>
+                  <li class="flex items-center gap-2 text-sm text-slate-800 dark:text-slate-200 font-light"><span class="font-mono text-xs text-slate-400">›</span>Problem solving</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="section-pad border-b border-rule" x-data="{ headingText: 'Systems Engineering Projects' }">
+        <div class="w-full">
+          <div class="mb-12 flex w-full items-end justify-between border-b border-rule pb-4 scroll-reveal" style="transform: translateY(15px);">
+            <div>
+              <p class="eyebrow font-mono">// SELECTED WORK</p>
+              <h2 class="mt-2 font-serif text-3xl text-slate-900 dark:text-white md:text-4xl min-h-10" 
+                  x-data="glitchComponent(headingText)" x-init="triggerGlitch()">
+                <span class="font-mono tracking-wide" x-text="displayText"></span>
+              </h2>
+            </div>
+            <span class="font-mono text-xs text-slate-400 dark:text-slate-500">§ CODE_04</span>
+          </div>
+
+          <div class="grid gap-6 sm:grid-cols-2">
+            
+            <div class="scroll-reveal" style="transform: translateY(20px);" data-delay="0">
+              <article class="group flex flex-col h-full overflow-hidden rounded-sm border border-rule bg-white dark:bg-[#03050a] transition-all duration-300 hover:border-accent/40 backdrop-blur-sm">
+                <div class="relative aspect-video overflow-hidden border-b border-rule bg-surface">
+                  <img src="/images/Vellaureimg.png" alt="Custom Clothing Business Website" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                  <div class="absolute inset-0 grid-bg hidden items-center justify-center">
+                    <div class="rounded-sm border border-rule bg-white/80 dark:bg-black/80 px-3 py-1 font-mono text-[11px] text-slate-500 backdrop-blur">LOG_RECON_01.TSX</div>
+                  </div>
+                  <span class="absolute right-3 top-3 z-10 rounded-sm border border-accent/20 bg-white/90 dark:bg-black/90 px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-accent backdrop-blur-sm">Live</span>
+                </div>
+                <div class="flex flex-1 flex-col p-6">
+                  <h3 class="font-serif text-xl text-slate-900 dark:text-white group-hover:text-accent transition-colors duration-300">Custom Clothing Business Website</h3>
+                  <p class="mt-2 text-sm text-slate-600 dark:text-slate-400 font-light">Online storefront with custom order intake and automated email confirmations for a clothing brand I co-founded.</p>
+                  <div class="mt-4 flex flex-wrap gap-1.5">
+                    <span class="rounded-sm border border-rule bg-surface px-2 py-0.5 font-mono text-[11px] text-slate-800 dark:text-slate-200">HTML</span>
+                    <span class="rounded-sm border border-rule bg-surface px-2 py-0.5 font-mono text-[11px] text-slate-800 dark:text-slate-200">CSS</span>
+                    <span class="rounded-sm border border-rule bg-surface px-2 py-0.5 font-mono text-[11px] text-slate-800 dark:text-slate-200">JavaScript</span>
+                    <span class="rounded-sm border border-rule bg-surface px-2 py-0.5 font-mono text-[11px] text-slate-800 dark:text-slate-200">EmailJS</span>
+                  </div>
+                  <div class="border-t border-rule pt-4 mt-6">
+                    <p class="eyebrow font-mono text-[11px]">COMPILE_LESSON_LOG</p>
+                    <p class="mt-2 text-sm text-slate-700 dark:text-slate-300 font-light">Translating a real business workflow into a structured order system; handling user input, validation, and async email delivery.</p>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <div class="scroll-reveal" style="transform: translateY(20px);" data-delay="100">
+              <article class="group flex flex-col h-full overflow-hidden rounded-sm border border-rule bg-white dark:bg-[#03050a] transition-all duration-300 hover:border-accent/40 backdrop-blur-sm">
+                <div class="relative aspect-video overflow-hidden border-b border-rule bg-surface">
+                  <img src="/images/clothing-site.png" alt="Python Utility Suite" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                  <div class="absolute inset-0 grid-bg hidden items-center justify-center">
+                    <div class="rounded-sm border border-rule bg-white/80 dark:bg-black/80 px-3 py-1 font-mono text-[11px] text-slate-500 backdrop-blur">LOG_RECON_02.TSX</div>
+                  </div>
+                  <span class="absolute right-3 top-3 z-10 rounded-sm border border-accent/20 bg-white/90 dark:bg-black/90 px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-accent backdrop-blur-sm">Complete</span>
+                </div>
+                <div class="flex flex-1 flex-col p-6">
+                  <h3 class="font-serif text-xl text-slate-900 dark:text-white group-hover:text-accent transition-colors duration-300">Python Utility Suite</h3>
+                  <p class="mt-2 text-sm text-slate-600 dark:text-slate-400 font-light">A bundle of small command-line tools — calculator, unit converter, and number guessing game — built to practice control flow and modular design.</p>
+                  <div class="mt-4 flex flex-wrap gap-1.5">
+                    <span class="rounded-sm border border-rule bg-surface px-2 py-0.5 font-mono text-[11px] text-slate-800 dark:text-slate-200">Python</span>
+                    <span class="rounded-sm border border-rule bg-surface px-2 py-0.5 font-mono text-[11px] text-slate-800 dark:text-slate-200">argparse</span>
+                  </div>
+                  <div class="border-t border-rule pt-4 mt-6">
+                    <p class="eyebrow font-mono text-[11px]">COMPILE_LESSON_LOG</p>
+                    <p class="mt-2 text-sm text-slate-700 dark:text-slate-300 font-light">Writing readable functions, separating logic from I/O, and packaging multiple scripts under one entry point.</p>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <div class="scroll-reveal" style="transform: translateY(20px);" data-delay="0">
+              <article class="group flex flex-col h-full overflow-hidden rounded-sm border border-rule bg-white dark:bg-[#03050a] transition-all duration-300 hover:border-accent/40 backdrop-blur-sm">
+                <div class="relative aspect-video overflow-hidden border-b border-rule bg-surface">
+                  <img src="/images/clothing-site.png" alt="Student Management System" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                  <div class="absolute inset-0 grid-bg hidden items-center justify-center">
+                    <div class="rounded-sm border border-rule bg-white/80 dark:bg-black/80 px-3 py-1 font-mono text-[11px] text-slate-500 backdrop-blur">LOG_RECON_03.TSX</div>
+                  </div>
+                  <span class="absolute right-3 top-3 z-10 rounded-sm border border-accent/20 bg-white/90 dark:bg-black/90 px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-accent backdrop-blur-sm">Complete</span>
+                </div>
+                <div class="flex flex-1 flex-col p-6">
+                  <h3 class="font-serif text-xl text-slate-900 dark:text-white group-hover:text-accent transition-colors duration-300">Student Management System</h3>
+                  <p class="mt-2 text-sm text-slate-600 dark:text-slate-400 font-light">OOP project modeling students, courses, and grades with persistent JSON storage and a simple CLI interface.</p>
+                  <div class="mt-4 flex flex-wrap gap-1.5">
+                    <span class="rounded-sm border border-rule bg-surface px-2 py-0.5 font-mono text-[11px] text-slate-800 dark:text-slate-200">Python</span>
+                    <span class="rounded-sm border border-rule bg-surface px-2 py-0.5 font-mono text-[11px] text-slate-800 dark:text-slate-200">OOP</span>
+                    <span class="rounded-sm border border-rule bg-surface px-2 py-0.5 font-mono text-[11px] text-slate-800 dark:text-slate-200">JSON</span>
+                  </div>
+                  <div class="border-t border-rule pt-4 mt-6">
+                    <p class="eyebrow font-mono text-[11px]">COMPILE_LESSON_LOG</p>
+                    <p class="mt-2 text-sm text-slate-700 dark:text-slate-300 font-light">Designing classes around real-world entities, using inheritance carefully, and serializing state to disk.</p>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <div class="scroll-reveal" style="transform: translateY(20px);" data-delay="100">
+              <article class="group flex flex-col h-full overflow-hidden rounded-sm border border-rule bg-white dark:bg-[#03050a] transition-all duration-300 hover:border-accent/40 backdrop-blur-sm">
+                <div class="relative aspect-video overflow-hidden border-b border-rule bg-surface">
+                  <img src="/images/clothing-site.png" alt="Arduino Environment Monitor" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                  <div class="absolute inset-0 grid-bg hidden items-center justify-center">
+                    <div class="rounded-sm border border-rule bg-white/80 dark:bg-black/80 px-3 py-1 font-mono text-[11px] text-slate-500 backdrop-blur">LOG_RECON_04.TSX</div>
+                  </div>
+                  <span class="absolute right-3 top-3 z-10 rounded-sm border border-accent/20 bg-white/90 dark:bg-black/90 px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-accent backdrop-blur-sm">Planned</span>
+                </div>
+                <div class="flex flex-1 flex-col p-6">
+                  <h3 class="font-serif text-xl text-slate-900 dark:text-white group-hover:text-accent transition-colors duration-300">Arduino Environment Monitor</h3>
+                  <p class="mt-2 text-sm text-slate-600 dark:text-slate-400 font-light">Planned IoT project: read temperature and humidity from sensors and stream data to a small dashboard.</p>
+                  <div class="mt-4 flex flex-wrap gap-1.5">
+                    <span class="rounded-sm border border-rule bg-surface px-2 py-0.5 font-mono text-[11px] text-slate-800 dark:text-slate-200">Arduino</span>
+                    <span class="rounded-sm border border-rule bg-surface px-2 py-0.5 font-mono text-[11px] text-slate-800 dark:text-slate-200">C++</span>
+                    <span class="rounded-sm border border-rule bg-surface px-2 py-0.5 font-mono text-[11px] text-slate-800 dark:text-slate-200">MQTT</span>
+                  </div>
+                  <div class="border-t border-rule pt-4 mt-6">
+                    <p class="eyebrow font-mono text-[11px]">COMPILE_LESSON_LOG</p>
+                    <p class="mt-2 text-sm text-slate-700 dark:text-slate-300 font-light">Bridging embedded hardware with network protocols — the kind of full-stack systems work Information Engineering centers on.</p>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <section id="experience" class="section-pad border-b border-rule" x-data="{ headingText: 'Experience' }">
+        <div class="w-full">
+          <div class="mb-12 flex w-full items-end justify-between border-b border-rule pb-4 scroll-reveal" style="transform: translateY(15px);">
+            <div>
+              <p class="eyebrow font-mono">// ACTIVITIES</p>
+              <h2 class="mt-2 font-serif text-3xl text-slate-900 dark:text-white md:text-4xl min-h-10" 
+                  x-data="glitchComponent(headingText)" x-init="triggerGlitch()">
+                <span class="font-mono tracking-wide" x-text="displayText"></span>
+              </h2>
+            </div>
+            <span class="font-mono text-xs text-slate-400 dark:text-slate-500">§ CODE_05</span>
+          </div>
+
+          <ol class="relative space-y-10 border-l border-rule pl-6 md:pl-8">
+            <li class="relative">
+              <div class="scroll-reveal" style="transform: translateY(20px);" data-delay="0">
+                <span class="absolute -left-7.75 md:-left-9.75 top-1.5 h-3 w-3 rounded-full border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#03050a] z-20"></span>
+                <div class="flex flex-wrap items-baseline justify-between gap-2">
+                  <h3 class="font-serif text-xl text-slate-900 dark:text-white">Co-founder &amp; Developer</h3>
+                  <span class="font-mono text-xs text-slate-400 dark:text-slate-500">2025 — Present</span>
+                </div>
+                <p class="mt-1 text-sm text-slate-500 dark:text-slate-400 font-mono">Custom clothing startup</p>
+                <p class="mt-3 max-w-2xl text-sm text-slate-700 dark:text-slate-300 font-light">Co-founded a small custom clothing brand with friends. Built and maintain the website, order intake flow, and email automation. Handle the technical operations end-to-end.</p>
+              </div>
+            </li>
+            <li class="relative">
+              <div class="scroll-reveal" style="transform: translateY(20px);" data-delay="80">
+                <span class="absolute -left-7.75 md:-left-9.75 top-1.5 h-3 w-3 rounded-full border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#03050a] z-20"></span>
+                <div class="flex flex-wrap items-baseline justify-between gap-2">
+                  <h3 class="font-serif text-xl text-slate-900 dark:text-white">Head of Business Club</h3>
+                  <span class="font-mono text-xs text-slate-400 dark:text-slate-500">2025 — Present</span>
+                </div>
+                <p class="mt-1 text-sm text-slate-500 dark:text-slate-400 font-mono">School activities</p>
+                <p class="mt-3 max-w-2xl text-sm text-slate-700 dark:text-slate-300 font-light">One of the school head business group. Participate in business challenges and mentor younger students taking their first steps toward business.</p>
+              </div>
+            </li>
+            <li class="relative">
+              <div class="scroll-reveal" style="transform: translateY(20px);" data-delay="160">
+                <span class="absolute -left-7.75 md:-left-9.75 top-1.5 h-3 w-3 rounded-full border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#03050a] z-20"></span>
+                <div class="flex flex-wrap items-baseline justify-between gap-2">
+                  <h3 class="font-serif text-xl text-slate-900 dark:text-white">Community Volunteer</h3>
+                  <span class="font-mono text-xs text-slate-400 dark:text-slate-500">2024 — Present</span>
+                </div>
+                <p class="mt-1 text-sm text-slate-500 dark:text-slate-400 font-mono">Local outreach</p>
+                <p class="mt-3 max-w-2xl text-sm text-slate-700 dark:text-slate-300 font-light">Volunteered with a community program supporting local youth, helping organize sessions and educating younger children.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="goals" class="section-pad border-b border-rule" x-data="{ headingText: 'Future Roadmap' }">
+        <div class="w-full">
+          <div class="mb-12 flex w-full items-end justify-between border-b border-rule pb-4 scroll-reveal" style="transform: translateY(15px);">
+            <div>
+              <p class="eyebrow font-mono">// TRAJECTORY</p>
+              <h2 class="mt-2 font-serif text-3xl text-slate-900 dark:text-white md:text-4xl min-h-10" 
+                  x-data="glitchComponent(headingText)" x-init="triggerGlitch()">
+                <span class="font-mono tracking-wide" x-text="displayText"></span>
+              </h2>
+            </div>
+            <span class="font-mono text-xs text-slate-400 dark:text-slate-500">§ CODE_06</span>
+          </div>
+
+          <div class="grid gap-px overflow-hidden rounded-sm border border-rule bg-rule sm:grid-cols-3">
+            <div class="scroll-reveal" style="transform: translateY(20px);" data-delay="0">
+              <div class="bg-white dark:bg-[#03050a] p-7 h-full hover:bg-surface/30 transition-colors duration-300">
+                <p class="font-mono text-xs text-accent">#0001</p>
+                <h3 class="mt-3 font-serif text-xl text-slate-900 dark:text-white">Study at TUM</h3>
+                <p class="mt-3 text-sm text-slate-600 dark:text-slate-400 font-light">Pursue a Bachelor's in Information Engineering at the Technical University of Munich starting 2026.</p>
+              </div>
+            </div>
+            <div class="scroll-reveal" style="transform: translateY(20px);" data-delay="80">
+              <div class="bg-white dark:bg-[#03050a] p-7 h-full hover:bg-surface/30 transition-colors duration-300">
+                <p class="font-mono text-xs text-accent">#0002</p>
+                <h3 class="mt-3 font-serif text-xl text-slate-900 dark:text-white">Build systems expertise</h3>
+                <p class="mt-3 text-sm text-slate-600 dark:text-slate-400 font-light">Develop deep knowledge in software architecture, data engineering, and intelligent systems.</p>
+              </div>
+            </div>
+            <div class="scroll-reveal" style="transform: translateY(20px);" data-delay="160">
+              <div class="bg-white dark:bg-[#03050a] p-7 h-full hover:bg-surface/30 transition-colors duration-300">
+                <p class="font-mono text-xs text-accent">#0003</p>
+                <h3 class="mt-3 font-serif text-xl text-slate-900 dark:text-white">Apply it</h3>
+                <p class="mt-3 text-sm text-slate-600 dark:text-slate-400 font-light">Contribute to engineering solutions that solve real problems — in industry, research, or my own ventures.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="section-pad" x-data="{ headingText: 'System Communication Hub' }">
+        <div class="w-full">
+          <div class="mb-12 flex w-full items-end justify-between border-b border-rule pb-4 scroll-reveal" style="transform: translateY(15px);">
+            <div>
+              <p class="eyebrow font-mono">// GET IN TOUCH</p>
+              <h2 class="mt-2 font-serif text-3xl text-slate-900 dark:text-white md:text-4xl min-h-10" 
+                  x-data="glitchComponent(headingText)" x-init="triggerGlitch()">
+                <span class="font-mono tracking-wide" x-text="displayText"></span>
+              </h2>
+            </div>
+            <span class="font-mono text-xs text-slate-400 dark:text-slate-500">§ CODE_07</span>
+          </div>
+
+          <div class="grid gap-10 md:grid-cols-12">
+            <div class="md:col-span-5">
+              <div class="scroll-reveal" style="transform: translateY(20px);" data-delay="50">
+                <div class="space-y-6">
+                  <p class="text-base leading-relaxed text-slate-700 dark:text-slate-300 font-light">
+                    Open for academic inquiries, portfolio evaluations, and technical feedback regarding my engineering path toward TUM.
+                  </p>
+                  <ul class="space-y-3 text-sm">
+                    <li class="flex flex-wrap items-center gap-2">
+                      <span class="eyebrow w-20 font-mono">COM_EMAIL</span>
+                      <a href="mailto:reagan9180@gmail.com" class="font-mono text-slate-900 dark:text-slate-200 hover:text-accent break-all text-xs">
+                        reagan9180@gmail.com
+                      </a>
+                    </li>
+                    <li class="flex flex-wrap items-center gap-2">
+                      <span class="eyebrow w-20 font-mono">SYS_GIT</span>
+                      <a href="https://github.com/reagan9180-prog" target="_blank" rel="noreferrer" class="font-mono text-slate-900 dark:text-slate-200 hover:text-accent break-all text-xs">
+                        github.com/reagan9180-prog
+                      </a>
+                    </li>
+                    <li class="flex flex-wrap items-center gap-2">
+                      <span class="eyebrow w-20 font-mono">LOC_NODE</span>
+                      <span class="font-mono text-slate-900 dark:text-slate-200 text-xs">Bandung, West Java, ID</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            
+            <div class="md:col-span-7">
+              <div class="scroll-reveal" style="transform: translateY(20px);" data-delay="100">
+                <form 
+                  x-data="{
+                    submitForm(e) {
+                      e.preventDefault();
+                      const formData = new FormData(e.target);
+                      const subject = encodeURIComponent(`Portfolio contact — ${formData.get('name')}`);
+                      const body = encodeURIComponent(`${formData.get('message')}\n\n— ${formData.get('name')} (${formData.get('email')})`);
+                      window.location.href = `mailto:hello@example.com?subject=${subject}&body=${body}`;
+                    }
+                  }"
+                  @submit="submitForm($event)" 
+                  class="space-y-4 rounded-sm border border-rule bg-surface p-6 backdrop-blur-sm"
+                >
+                  <div class="grid gap-4 sm:grid-cols-2">
+                    <label class="block">
+                      <span class="eyebrow font-mono text-[11px]">NAME</span>
+                      <input name="name" type="text" required class="mt-1 w-full rounded-sm border border-border bg-white/70 dark:bg-[#03050a]/70 px-3 py-2 text-sm outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/20 font-light">
+                    </label>
+                    <label class="block">
+                      <span class="eyebrow font-mono text-[11px]">EMAIL</span>
+                      <input name="email" type="email" required class="mt-1 w-full rounded-sm border border-border bg-white/70 dark:bg-[#03050a]/70 px-3 py-2 text-sm outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/20 font-light">
+                    </label>
+                  </div>
+                  <label class="block">
+                    <span class="eyebrow font-mono text-[11px]">MESSAGE</span>
+                    <textarea name="message" required rows="5" class="mt-1 w-full rounded-sm border border-border bg-white/70 dark:bg-[#03050a]/70 px-3 py-2 text-sm outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/20 font-light"></textarea>
+                  </label>
+                  <div class="flex flex-wrap items-center justify-between gap-4 pt-2">
+                    <p class="font-mono text-[11px] text-slate-500 dark:text-slate-400">
+                      Sends via native system protocol
+                    </p>
+                    <button type="submit" class="inline-flex items-center gap-2 rounded-sm bg-slate-900 dark:bg-slate-100 px-5 py-2.5 text-sm font-medium text-white dark:text-[#03050a] transition hover:opacity-90 w-full sm:w-auto justify-center font-mono">
+                      TRANSMIT_MSG 
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="border-t border-rule mt-auto w-full">
+      <div class="flex flex-col items-start justify-between gap-3 py-8 text-xs text-slate-500 dark:text-slate-400 sm:flex-row sm:items-center">
+        <p class="font-mono">© <span x-text="new Date().getFullYear()"></span> · Portfolio · Jakarta ➔ München</p>
+        <p class="font-mono">Built with React · TanStack · Tailwind</p>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const reveals = document.querySelectorAll(".scroll-reveal");
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const target = entry.target;
+            const delay = target.getAttribute("data-delay") || 0;
+            
+            setTimeout(() => {
+              target.classList.add("revealed");
+              
+              // Apply short glitch overlay on viewport enter
+              target.classList.add("animate-matrix-glitch");
+              setTimeout(() => {
+                target.classList.remove("animate-matrix-glitch");
+              }, 400);
+              
+            }, parseInt(delay));
+            
+            observer.unobserve(target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      reveals.forEach(el => observer.observe(el));
+    });
+
+    // Technical Text Decrypt Glitch Object Mapping
+    function glitchComponent(targetText) {
+      return {
+        text: targetText,
+        displayText: targetText,
+        chars: "X01_█▓░##//_IE_TUM",
+        triggerGlitch() {
+          let iteration = 0;
+          const length = this.text.length;
+          
+          // Wait briefly for intersection trigger synchronization
+          setTimeout(() => {
+            const interval = setInterval(() => {
+              this.displayText = this.text
+                .split("")
+                .map((letter, index) => {
+                  if (index < iteration || letter === " ") return this.text[index];
+                  return this.chars[Math.floor(Math.random() * this.chars.length)];
+                })
+                .join("");
+
+              if (iteration >= length) clearInterval(interval);
+              iteration += 1 / 2;
+            }, 30);
+          }, 200);
+        }
+      }
+    }
+  </script>
+</body>
+</html>
