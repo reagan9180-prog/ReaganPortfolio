@@ -85,47 +85,47 @@
       transform: translate(0, 0) scale(1) !important;
     }
     :root {
-  --mouse-x: 50%;
-  --mouse-y: 50%;
-}
+      --mouse-x: 50%;
+      --mouse-y: 50%;
+    }
 
-.spotlight {
-  background: radial-gradient(circle 450px at var(--mouse-x) var(--mouse-y), rgba(59, 130, 246, 0.15), transparent 100%);
-}
-.secondary-glow {
-  background: radial-gradient(circle 600px at 50% 30%, rgba(234, 179, 8, 0.1), transparent 100%);
-}
-.grid-overlay {
-  background-image: 
-    linear-gradient(to right, #000000 1px, transparent 1px),
-    linear-gradient(to bottom, #000000 1px, transparent 1px);
-  background-size: 64px 64px;
-}
+    .spotlight {
+      background: radial-gradient(circle 450px at var(--mouse-x) var(--mouse-y), rgba(59, 130, 246, 0.15), transparent 100%);
+    }
+    .secondary-glow {
+      background: radial-gradient(circle 600px at 50% 30%, rgba(234, 179, 8, 0.1), transparent 100%);
+    }
+    .grid-overlay {
+      background-image: 
+        linear-gradient(to right, #000000 1px, transparent 1px),
+        linear-gradient(to bottom, #000000 1px, transparent 1px);
+      background-size: 64px 64px;
+    }
 
-/* Dark Mode Overrides */
-.dark .spotlight {
-  background: radial-gradient(circle 450px at var(--mouse-x) var(--mouse-y), rgba(0, 243, 255, 0.12), transparent 100%);
-}
-.dark .secondary-glow {
-  background: radial-gradient(circle 600px at 50% 30%, rgba(29, 78, 216, 0.2), transparent 100%);
-}
-.dark .grid-overlay {
-  background-image: 
-    linear-gradient(to right, #ffffff 1px, transparent 1px),
-    linear-gradient(to bottom, #ffffff 1px, transparent 1px);
-}
+    /* Dark Mode Overrides */
+    .dark .spotlight {
+      background: radial-gradient(circle 450px at var(--mouse-x) var(--mouse-y), rgba(0, 243, 255, 0.12), transparent 100%);
+    }
+    .dark .secondary-glow {
+      background: radial-gradient(circle 600px at 50% 30%, rgba(29, 78, 216, 0.2), transparent 100%);
+    }
+    .dark .grid-overlay {
+      background-image: 
+        linear-gradient(to right, #ffffff 1px, transparent 1px),
+        linear-gradient(to bottom, #ffffff 1px, transparent 1px);
+    }
 
-/* Accent Spin Keyframes */
-@keyframes spinSlow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-@keyframes spinReverse {
-  from { transform: rotate(360deg); }
-  to { transform: rotate(0deg); }
-}
-.animate-spin-slow { animation: spinSlow 120s linear infinite; }
-.animate-spin-reverse { animation: spinReverse 80s linear infinite; }
+    /* Accent Spin Keyframes */
+    @keyframes spinSlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes spinReverse {
+      from { transform: rotate(360deg); }
+      to { transform: rotate(0deg); }
+    }
+    .animate-spin-slow { animation: spinSlow 120s linear infinite; }
+    .animate-spin-reverse { animation: spinReverse 80s linear infinite; }
   </style>
 
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -150,21 +150,17 @@
       localStorage.setItem('theme', this.isDark ? 'dark' : 'light');
     }
   }" 
-  class="relative min-w-full min-h-screen bg-[#fafafa] dark:bg-[#03050a] text-slate-900 dark:text-slate-100 transition-colors duration-500 font-sans">
-<div id="chip-background" aria-hidden="true" class="fixed inset-0 w-screen h-screen -z-10 overflow-hidden pointer-events-none select-none transition-colors duration-700 bg-[#fafafa] dark:bg-[#03050a]">
+  class="relative w-full min-h-screen bg-[#fafafa] dark:bg-[#03050a] text-slate-900 dark:text-slate-100 transition-colors duration-500 overflow-x-hidden font-sans">
   
-  <div class="spotlight absolute inset-0 w-full h-full opacity-40 dark:opacity-30 transition-all duration-300 mix-blend-screen pointer-events-none"></div>
-
-  <div class="secondary-glow absolute inset-0 w-full h-full opacity-25 dark:opacity-10 transition-all duration-500 mix-blend-plus-lighter pointer-events-none"></div>
-
-  <div class="grid-overlay absolute inset-0 w-full h-full opacity-[0.03] dark:opacity-[0.04] pointer-events-none"></div>
-
-  <div class="absolute top-0 left-1/4 right-1/4 h-px pointer-events-none" style="background: linear-gradient(to right, transparent, rgba(6, 182, 212, 0.3), transparent);"></div>
-  <div class="absolute bottom-1/3 left-10 right-10 h-px opacity-40 pointer-events-none" style="background: linear-gradient(to right, transparent, rgba(148, 163, 184, 0.2), transparent);"></div>
-
-  <div class="absolute top-1/4 right-10 w-96 h-96 rounded-full border border-slate-500/5 dark:border-slate-400/3 animate-spin-slow pointer-events-none"></div>
-  <div class="absolute top-1/4 right-10 w-96 h-96 rounded-full border border-dashed border-slate-500/5 dark:border-slate-400/2 animate-spin-reverse pointer-events-none"></div>
-</div>
+  <div id="chip-background" aria-hidden="true" class="fixed inset-0 w-full h-full -z-10 overflow-hidden pointer-events-none select-none transition-colors duration-700 bg-[#fafafa] dark:bg-[#03050a]">
+    <div class="spotlight absolute inset-0 w-full h-full opacity-40 dark:opacity-30 transition-all duration-300 mix-blend-screen pointer-events-none"></div>
+    <div class="secondary-glow absolute inset-0 w-full h-full opacity-25 dark:opacity-10 transition-all duration-500 mix-blend-plus-lighter pointer-events-none"></div>
+    <div class="grid-overlay absolute inset-0 w-full h-full opacity-[0.03] dark:opacity-[0.04] pointer-events-none"></div>
+    <div class="absolute top-0 left-1/4 right-1/4 h-px pointer-events-none" style="background: linear-gradient(to right, transparent, rgba(6, 182, 212, 0.3), transparent);"></div>
+    <div class="absolute bottom-1/3 left-10 right-10 h-px opacity-40 pointer-events-none" style="background: linear-gradient(to right, transparent, rgba(148, 163, 184, 0.2), transparent);"></div>
+    <div class="absolute top-1/4 right-10 w-96 h-96 rounded-full border border-slate-500/5 dark:border-slate-400/3 animate-spin-slow pointer-events-none"></div>
+    <div class="absolute top-1/4 right-10 w-96 h-96 rounded-full border border-dashed border-slate-500/5 dark:border-slate-400/2 animate-spin-reverse pointer-events-none"></div>
+  </div>
 
   <div class="fixed inset-0 pointer-events-none overflow-hidden z-0 opacity-30 dark:opacity-20" aria-hidden="true">
     <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-blue-500/10 blur-[120px]"></div>
@@ -665,200 +661,4 @@
 
           <div class="grid gap-px overflow-hidden rounded-sm border border-rule bg-rule sm:grid-cols-3">
             <div class="scroll-reveal" style="transform: translateY(20px);" data-delay="0">
-              <div class="bg-white dark:bg-[#03050a] p-7 h-full hover:bg-surface/30 transition-colors duration-300">
-                <p class="font-mono text-xs text-accent">#0001</p>
-                <h3 class="mt-3 font-serif text-xl text-slate-900 dark:text-white">Study at TUM</h3>
-                <p class="mt-3 text-sm text-slate-600 dark:text-slate-400 font-light">Pursue a Bachelor's in Information Engineering at the Technical University of Munich starting 2026.</p>
-              </div>
-            </div>
-            <div class="scroll-reveal" style="transform: translateY(20px);" data-delay="80">
-              <div class="bg-white dark:bg-[#03050a] p-7 h-full hover:bg-surface/30 transition-colors duration-300">
-                <p class="font-mono text-xs text-accent">#0002</p>
-                <h3 class="mt-3 font-serif text-xl text-slate-900 dark:text-white">Build systems expertise</h3>
-                <p class="mt-3 text-sm text-slate-600 dark:text-slate-400 font-light">Develop deep knowledge in software architecture, data engineering, and intelligent systems.</p>
-              </div>
-            </div>
-            <div class="scroll-reveal" style="transform: translateY(20px);" data-delay="160">
-              <div class="bg-white dark:bg-[#03050a] p-7 h-full hover:bg-surface/30 transition-colors duration-300">
-                <p class="font-mono text-xs text-accent">#0003</p>
-                <h3 class="mt-3 font-serif text-xl text-slate-900 dark:text-white">Apply it</h3>
-                <p class="mt-3 text-sm text-slate-600 dark:text-slate-400 font-light">Contribute to engineering solutions that solve real problems — in industry, research, or my own ventures.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="contact" class="section-pad" x-data="{ headingText: 'System Communication Hub' }">
-        <div class="w-full">
-          <div class="mb-12 flex w-full items-end justify-between border-b border-rule pb-4 scroll-reveal" style="transform: translateY(15px);">
-            <div>
-              <p class="eyebrow font-mono">// GET IN TOUCH</p>
-              <h2 class="mt-2 font-serif text-3xl text-slate-900 dark:text-white md:text-4xl min-h-10" 
-                  x-data="glitchComponent(headingText)" x-init="triggerGlitch()">
-                <span class="font-mono tracking-wide" x-text="displayText"></span>
-              </h2>
-            </div>
-            <span class="font-mono text-xs text-slate-400 dark:text-slate-500">§ CODE_07</span>
-          </div>
-
-          <div class="grid gap-10 md:grid-cols-12">
-            <div class="md:col-span-5">
-              <div class="scroll-reveal" style="transform: translateY(20px);" data-delay="50">
-                <div class="space-y-6">
-                  <p class="text-base leading-relaxed text-slate-700 dark:text-slate-300 font-light">
-                    Open for academic inquiries, portfolio evaluations, and technical feedback regarding my engineering path toward TUM.
-                  </p>
-                  <ul class="space-y-3 text-sm">
-                    <li class="flex flex-wrap items-center gap-2">
-                      <span class="eyebrow w-20 font-mono">COM_EMAIL</span>
-                      <a href="mailto:reagan9180@gmail.com" class="font-mono text-slate-900 dark:text-slate-200 hover:text-accent break-all text-xs">
-                        reagan9180@gmail.com
-                      </a>
-                    </li>
-                    <li class="flex flex-wrap items-center gap-2">
-                      <span class="eyebrow w-20 font-mono">SYS_GIT</span>
-                      <a href="https://github.com/reagan9180-prog" target="_blank" rel="noreferrer" class="font-mono text-slate-900 dark:text-slate-200 hover:text-accent break-all text-xs">
-                        github.com/reagan9180-prog
-                      </a>
-                    </li>
-                    <li class="flex flex-wrap items-center gap-2">
-                      <span class="eyebrow w-20 font-mono">LOC_NODE</span>
-                      <span class="font-mono text-slate-900 dark:text-slate-200 text-xs">Bandung, West Java, ID</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            
-            <div class="md:col-span-7">
-              <div class="scroll-reveal" style="transform: translateY(20px);" data-delay="100">
-                <form 
-                  x-data="{
-                    submitForm(e) {
-                      e.preventDefault();
-                      const formData = new FormData(e.target);
-                      const subject = encodeURIComponent(`Portfolio contact — ${formData.get('name')}`);
-                      const body = encodeURIComponent(`${formData.get('message')}\n\n— ${formData.get('name')} (${formData.get('email')})`);
-                      window.location.href = `mailto:hello@example.com?subject=${subject}&body=${body}`;
-                    }
-                  }"
-                  @submit="submitForm($event)" 
-                  class="space-y-4 rounded-sm border border-rule bg-surface p-6 backdrop-blur-sm"
-                >
-                  <div class="grid gap-4 sm:grid-cols-2">
-                    <label class="block">
-                      <span class="eyebrow font-mono text-[11px]">NAME</span>
-                      <input name="name" type="text" required class="mt-1 w-full rounded-sm border border-border bg-white/70 dark:bg-[#03050a]/70 px-3 py-2 text-sm outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/20 font-light">
-                    </label>
-                    <label class="block">
-                      <span class="eyebrow font-mono text-[11px]">EMAIL</span>
-                      <input name="email" type="email" required class="mt-1 w-full rounded-sm border border-border bg-white/70 dark:bg-[#03050a]/70 px-3 py-2 text-sm outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/20 font-light">
-                    </label>
-                  </div>
-                  <label class="block">
-                    <span class="eyebrow font-mono text-[11px]">MESSAGE</span>
-                    <textarea name="message" required rows="5" class="mt-1 w-full rounded-sm border border-border bg-white/70 dark:bg-[#03050a]/70 px-3 py-2 text-sm outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/20 font-light"></textarea>
-                  </label>
-                  <div class="flex flex-wrap items-center justify-between gap-4 pt-2">
-                    <p class="font-mono text-[11px] text-slate-500 dark:text-slate-400">
-                      Sends via native system protocol
-                    </p>
-                    <button type="submit" class="inline-flex items-center gap-2 rounded-sm bg-slate-900 dark:bg-slate-100 px-5 py-2.5 text-sm font-medium text-white dark:text-[#03050a] transition hover:opacity-90 w-full sm:w-auto justify-center font-mono">
-                      TRANSMIT_MSG 
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-    </main>
-
-    <footer class="border-t border-rule mt-auto w-full">
-      <div class="flex flex-col items-start justify-between gap-3 py-8 text-xs text-slate-500 dark:text-slate-400 sm:flex-row sm:items-center">
-        <p class="font-mono">© <span x-text="new Date().getFullYear()"></span> · Portfolio · Jakarta ➔ München</p>
-        <p class="font-mono">Built with React · TanStack · Tailwind</p>
-      </div>
-    </footer>
-
-  </div>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const reveals = document.querySelectorAll(".scroll-reveal");
-      
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const target = entry.target;
-            const delay = target.getAttribute("data-delay") || 0;
-            
-            setTimeout(() => {
-              target.classList.add("revealed");
-              
-              // Apply short glitch overlay on viewport enter
-              target.classList.add("animate-matrix-glitch");
-              setTimeout(() => {
-                target.classList.remove("animate-matrix-glitch");
-              }, 400);
-              
-            }, parseInt(delay));
-            
-            observer.unobserve(target);
-          }
-        });
-      }, { threshold: 0.12 });
-
-      reveals.forEach(el => observer.observe(el));
-    });
-
-    // Technical Text Decrypt Glitch Object Mapping
-    function glitchComponent(targetText) {
-      return {
-        text: targetText,
-        displayText: targetText,
-        chars: "X01_█▓░##//_IE_TUM",
-        triggerGlitch() {
-          let iteration = 0;
-          const length = this.text.length;
-          
-          // Wait briefly for intersection trigger synchronization
-          setTimeout(() => {
-            const interval = setInterval(() => {
-              this.displayText = this.text
-                .split("")
-                .map((letter, index) => {
-                  if (index < iteration || letter === " ") return this.text[index];
-                  return this.chars[Math.floor(Math.random() * this.chars.length)];
-                })
-                .join("");
-
-              if (iteration >= length) clearInterval(interval);
-              iteration += 1 / 2;
-            }, 30);
-          }, 200);
-        }
-      }
-    }
-    document.addEventListener("DOMContentLoaded", () => {
-    const container = document.getElementById("chip-background");
-    
-    if (container) {
-      window.addEventListener("mousemove", (e) => {
-        const rect = container.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-        
-        // Pass the mouse positions straight into the CSS environment
-        document.documentElement.style.setProperty('--mouse-x', `${x}%`);
-        document.documentElement.style.setProperty('--mouse-y', `${y}%`);
-      }, { passive: true });
-    }
-  });
-  </script>
-</body>
-</html>
+              <div class="bg-white dark:bg
