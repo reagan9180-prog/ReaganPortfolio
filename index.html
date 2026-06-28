@@ -36,6 +36,14 @@
   </script>
 
   <style type="text/css">
+    html,
+      body {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+      }
     /* Synchronized Theme Tokens Mapping */
     .dark {
       --color-surface: rgba(255, 255, 255, 0.02);
@@ -150,8 +158,8 @@
       localStorage.setItem('theme', this.isDark ? 'dark' : 'light');
     }
   }" 
-  class="relative w-full min-h-screen bg-[#fafafa] dark:bg-[#03050a] text-slate-900 dark:text-slate-100 transition-colors duration-500 overflow-x-hidden font-sans"
-<div id="chip-background" aria-hidden="true" class="fixed inset-0 w-full min-w-full h-full min-h-screen -z-10 overflow-hidden pointer-events-none select-none transition-colors duration-700 bg-[#fafafa] dark:bg-[#03050a]">
+  class="relative w-full min-h-screen bg-[#fafafa] dark:bg-[#03050a] text-slate-900 dark:text-slate-100 transition-colors duration-500 overflow-x-hidden font-sans">
+<div id="chip-background" aria-hidden="true" class="fixed inset-0 w-screen h-screen -z-10 overflow-hidden pointer-events-none select-none bg-[#fafafa] dark:bg-[#03050a]">
   
   <div class="spotlight absolute inset-0 w-full h-full opacity-40 dark:opacity-30 transition-all duration-300 mix-blend-screen pointer-events-none"></div>
 
@@ -165,7 +173,6 @@
   <div class="absolute top-1/4 right-10 w-96 h-96 rounded-full border border-slate-500/5 dark:border-slate-400/3 animate-spin-slow pointer-events-none"></div>
   <div class="absolute top-1/4 right-10 w-96 h-96 rounded-full border border-dashed border-slate-500/5 dark:border-slate-400/2 animate-spin-reverse pointer-events-none"></div>
 </div>
->
 
   <div class="absolute inset-0 pointer-events-none overflow-hidden z-0 opacity-30 dark:opacity-20" aria-hidden="true">
     <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-blue-500/10 blur-[120px]"></div>
@@ -227,7 +234,7 @@
     </div>
   </header>
 
-  <div class="relative z-10 w-full max-w-7xl mx-auto min-h-screen flex flex-col px-4 sm:px-6 md:px-8">
+  <div class="relative z-10 w-full min-h-screen flex flex-col">
     <main class="grow">
       
       <section id="top" class="relative w-full overflow-hidden border-b border-rule">
