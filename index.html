@@ -440,7 +440,92 @@
           </</ol>
         </div>
       </section>
+      <section id="kalimantan-slideshow" class="section-pad border-b border-rule">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="reveal reveal-in">
+      <div class="mb-12 flex items-end justify-between border-b border-rule pb-4 hud-frame">
+        <div>
+          <p class="eyebrow">Outreach & Community</p>
+          <h2 class="mt-2 font-serif text-3xl md:text-4xl glitch" data-text="10 Days in Kalimantan">10 Days in Kalimantan</h2>
+        </div>
+        <span class="font-mono text-xs text-muted-foreground">Living Water Village</span>
+      </div>
+    </div>
 
+    <p class="mb-8 max-w-3xl text-base leading-relaxed text-foreground/90">
+      Serving and connecting with the community at Living Water Village (Desa Air Hidup) in West Kalimantan. A 10-day journey dedicated to youth support, hands-on service, and community building.
+    </p>
+
+    <div class="relative overflow-hidden rounded-sm border border-rule bg-surface shadow-2xl">
+      <div id="slideshow-track" class="relative aspect-[16/9] w-full overflow-hidden md:aspect-[21/9]">
+        
+        <div class="slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-100">
+          <img src="./public/images/kalimantan-1.jpg" alt="Living Water Village - Day 1" class="h-full w-full object-cover">
+          <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6 text-white">
+            <span class="font-mono text-xs text-accent">Day 01–03</span>
+            <p class="mt-1 font-serif text-lg font-medium">Arrival & Community Welcome at Living Water Village</p>
+          </div>
+        </div>
+
+        <div class="slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0">
+          <img src="./public/images/kalimantan-2.jpg" alt="Living Water Village - Day 2" class="h-full w-full object-cover">
+          <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6 text-white">
+            <span class="font-mono text-xs text-accent">Day 04–07</span>
+            <p class="mt-1 font-serif text-lg font-medium">Hands-on Service & Youth Educational Workshops</p>
+          </div>
+        </div>
+
+        <div class="slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0">
+          <img src="./public/images/kalimantan-3.jpg" alt="Living Water Village - Day 3" class="h-full w-full object-cover">
+          <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6 text-white">
+            <span class="font-mono text-xs text-accent">Day 08–10</span>
+            <p class="mt-1 font-serif text-lg font-medium">Community Projects & Final Farewell</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="absolute top-4 right-4 z-10 flex items-center gap-2 rounded-sm border border-border/50 bg-background/70 px-3 py-1.5 backdrop-blur">
+        <span id="slide-counter" class="font-mono text-xs text-foreground">1 / 3</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function initKalimantanSlideshow() {
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('#slideshow-track .slide');
+    const counter = document.getElementById('slide-counter');
+    const totalSlides = slides.length;
+    const intervalTime = 4000; // Changes image every 4 seconds
+
+    if (!slides.length) return;
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        if (i === index) {
+          slide.classList.remove('opacity-0');
+          slide.classList.add('opacity-100');
+        } else {
+          slide.classList.remove('opacity-100');
+          slide.classList.add('opacity-0');
+        }
+      });
+      if (counter) {
+        counter.textContent = `${index + 1} / ${totalSlides}`;
+      }
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      showSlide(currentSlide);
+    }
+
+    // Start Auto-Play
+    setInterval(nextSlide, intervalTime);
+  })();
+</script>
       <section id="goals" class="section-pad border-b border-rule">
         <div class="mx-auto max-w-6xl px-6">
           <div class="reveal reveal-in">
